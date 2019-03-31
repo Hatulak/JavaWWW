@@ -1,70 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
-           xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="breakfast_menu" type="breakfast_menuType"/>
-    <xs:complexType name="priceType">
-        <xs:simpleContent>
-            <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" name="curr" use="optional"/>
-            </xs:extension>
-        </xs:simpleContent>
-    </xs:complexType>
-    <xs:complexType name="foodType">
-        <xs:sequence>
-            <xs:element name="name">
-                <xs:annotation>
-                    <xs:documentation>atrybut musi wystąpić, tylko fruits|bread|milk|vegetables</xs:documentation>
-                </xs:annotation>
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="Belgian Waffles"/>
-                        <xs:enumeration value="Strawberry Belgian Waffles"/>
-                        <xs:enumeration value="Strawberries"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element type="priceType" name="price">
-                <xs:annotation>
-                    <xs:documentation>musi wystąpić</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="description">
-                <xs:annotation>
-                    <xs:documentation>musi wystąpić musi wystąpić min 20 znaków, max 100 znaków</xs:documentation>
-                </xs:annotation>
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="
-            Two of our famous Belgian Waffles with plenty of real maple syrup
-        "/>
-                        <xs:enumeration value="
-            Light Belgian waffles covered with strawberries and whipped cream
-        "/>
-                        <xs:enumeration value="
-            Fresh tasty strawberries
-        "/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="calories">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="650"/>
-                        <xs:enumeration value="900"/>
-                        <xs:enumeration value="90"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-        </xs:sequence>
-        <xs:attribute type="xs:string" name="type" use="optional"/>
-    </xs:complexType>
-    <xs:complexType name="breakfast_menuType">
-        <xs:sequence>
-            <xs:element type="foodType" name="food" maxOccurs="unbounded" minOccurs="0">
-                <xs:annotation>
-                    <xs:documentation>brak wartości ujemnych</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="breakfast_menu">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="food" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name" type="xs:string"/>
+                            <xs:element name="price">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:decimal">
+                                            <xs:attribute name="curr" type="xs:string" default="$"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="calories" type="xs:integer" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="type">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:pattern value="fruits|bread|vegetables|milk"/>
+                                </xs:restriction>
+
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

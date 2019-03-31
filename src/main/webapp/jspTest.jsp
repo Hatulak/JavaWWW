@@ -80,5 +80,18 @@ ${fd:formatujZliczb(12,10 ,1293)}<br>
 ${fd:formatujZNapisow("10","maj" ,"1982")}<br>
 
 
+<br>
+<br>
+<br>
+
+<c:forEach var="food_list" items="${sessionScope.XMLList}" varStatus="i">
+    <c:forEach var="food" items="${food_list}" varStatus="j">
+        ${food}<br>
+    </c:forEach>
+    <br>
+</c:forEach>
+
+
+
 </body>
 </html>
