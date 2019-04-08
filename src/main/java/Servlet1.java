@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,6 +46,10 @@ public class Servlet1 extends HttpServlet {
             }
             users.add(fname + " " + lastName + " " + login + " " + age + " " + inter);
             sc.setAttribute("users", users);
+        }
+        HttpSession session = request.getSession();
+        synchronized (session) {
+            session.setAttribute("login", login);
         }
         RequestDispatcher rd = request.getRequestDispatcher("/Servlet2");
         rd.forward(request, response);

@@ -8,4 +8,9 @@
          version="4.0">
 
 
+    <context-param>
+        <param-name>listSize</param-name>
+        <param-value>10</param-value>
+    </context-param>
+
 </web-app>
