@@ -13,16 +13,26 @@
 </head>
 <body>
 
+<form action="process" method="post">
+    <table>
+        <c:forEach var="book" items="${sessionScope.books}">
+            <tr>
+                <td>${book.id}</td>
+                <td>${book.title}</td>
+                <td>${book.author}</td>
+                <td>${book.category}</td>
+                <td>${book.cover}</td>
+                <td>${book.price}</td>
+                <td><input type="checkbox" name="checked" value="${book.id}"></td>
+                <td><input type="radio" name="selected" value="${book.id}"></td>
+            </tr>
+        </c:forEach>
+    </table>
+    <input type="submit" name="deleteButton" value="Delete Checked">
+    <input type="submit" name="updateButton" value="Update Selected">
+</form>
 
-<c:forEach var="book" items="${sessionScope.books}">
-    ${book.id}<br>
-    ${book.title}<br>
-    ${book.author}<br>
-    ${book.category}<br>
-    ${book.cover}<br>
-    ${book.price}<br>
-</c:forEach>
-
-
+<form><input type="button" onclick="window.location.href = 'http://localhost:8080/testjava_war_exploded/createBook';"
+             value="Create New Book"></form>
 </body>
 </html>

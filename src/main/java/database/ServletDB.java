@@ -13,12 +13,16 @@ import java.util.List;
 @WebServlet(name = "ServletDB", urlPatterns = "/showDB")
 public class ServletDB extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Book book = new Book("sad", "dsa", "asd", "asd", 13.0);
         HBook.save(book);
+        processRequest(request, response);
+    }
+
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Book> books = HBook.getAll();
         HttpSession session = request.getSession();
 

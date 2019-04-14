@@ -37,10 +37,21 @@ public class HBook {
     public static void delete(Book book) {
         EntityManagerFactory entityManagerFactory = SessionFactory.getEntityManagerFactory();
         EntityManager manager = entityManagerFactory.createEntityManager();
+        Book book1 = manager.find(Book.class, book.getId());
         manager.getTransaction().begin();
-        manager.remove(book);
+        manager.remove(book1);
         manager.getTransaction().commit();
         manager.close();
+    }
+
+    public static Book findById(Long id) {
+        EntityManagerFactory entityManagerFactory = SessionFactory.getEntityManagerFactory();
+        EntityManager manager = entityManagerFactory.createEntityManager();
+        manager.getTransaction().begin();
+        Book book = manager.find(Book.class, id);
+        manager.getTransaction().commit();
+        manager.close();
+        return book;
     }
 
 
